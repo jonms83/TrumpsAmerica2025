@@ -5,17 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSV to Table</title>
     <style>
-        table {
+        /* Table styling */
+        .csv-table {
             width: 100%;
             border-collapse: collapse;
+            table-layout: fixed; /* Ensures columns respect their widths */
         }
-        th, td {
+
+        /* Make headers resizable */
+        .csv-table th {
             padding: 8px;
-            text-align: left;
             border: 1px solid #ddd;
-        }
-        th {
+            text-align: left;
             background-color: #f2f2f2;
+            resize: horizontal; /* Allow horizontal resizing */
+            overflow: auto; /* Required for resize to work */
+            min-width: 50px; /* Minimum width for columns */
+        }
+
+        /* Cell styling */
+        .csv-table td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+            max-height: 100px; /* Fixed height for scrollable cells */
+            overflow: auto; /* Make text scrollable */
+        }
+
+        /* Zebra striping */
+        .csv-table .even-row {
+            background-color: #f9f9f9; /* Light gray for even rows */
+        }
+        .csv-table .odd-row {
+            background-color: #ffffff; /* White for odd rows */
+        }
+
+        /* Link styling */
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -24,6 +55,8 @@
     <h2>Parsed Data in Table</h2>
     <div id="output"></div>
 
+    <!-- Include PapaParse library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="script.js"></script>
 </body>
-</html>
+</
