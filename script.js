@@ -12,7 +12,6 @@ fetch(csvUrl)
             skipEmptyLines: true, // Skip empty lines
             complete: function (results) {
                 displayDataInTable(results.data); // Display the parsed data in a table
-                makeColumnsResizable(); // Enable column resizing
             },
             error: function (error) {
                 console.error("Error parsing CSV:", error);
@@ -65,43 +64,4 @@ function displayDataInTable(data) {
     // Append the table to the output div
     const output = document.getElementById('output');
     output.appendChild(table);
-}
-
-function makeColumnsResizable() {
-    const table = document.querySelector('.csv-table');
-    const headers = table.querySelectorAll('th');
-
-    headers.forEach((header, index) => {
-        let isResizing = false;
-        let startX;
-        let startWidth;
-
-        // Create a resizer element
-        const resizer = document.createElement('div');
-        resizer.className = 'resizer';
-        header.appendChild(resizer);
-
-        // Add event listeners for resizing
-        resizer.addEventListener('mousedown', (e) => {
-            isResizing = true;
-            startX = e.clientX;
-            startWidth = header.offsetWidth;
-            document.addEventListener('mousemove', onMouseMove);
-            document.addEventListener('mouseup', onMouseUp);
-        });
-
-        function onMouseMove(e) {
-            if (isResizing) {
-                const newWidth = startWidth + (e.clientX - startX);
-                header.style.width = `${newWidth}px`;
-                table.style.tableLayout = 'auto'; // Allow columns to resize
-            }
-        }
-
-        function onMouseUp() {
-            isResizing = false;
-            document.removeEventListener('mousemove', onMouseMove);
-            document.removeEventListener('mouseup', onMouseUp);
-        }
-    });
 }
