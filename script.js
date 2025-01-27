@@ -49,7 +49,7 @@ function displayDataInTable(data) {
             if (typeof column === 'string' && (column.startsWith('http://') || column.startsWith('https://'))) {
                 const link = document.createElement('a');
                 link.href = column; // Set the URL
-                link.textContent = column; // Display the URL text
+                link.textContent = column.slice(0, 30)+"..."; // Display the URL text
                 link.target = '_blank'; // Open in a new window
                 td.appendChild(link); // Add the link to the cell
             } else {

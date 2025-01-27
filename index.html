@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSV to Table</title>
     <style>
+		body {font-size:12px;}
         /* Table styling */
         .csv-table {
-            width: 100%;
+            min-width: 1000px;
             border-collapse: collapse;
             table-layout: fixed; /* Ensures columns respect their widths */
         }
@@ -30,6 +31,12 @@
             text-align: left;
             max-height: 100px; /* Fixed height for scrollable cells */
             overflow: auto; /* Make text scrollable */
+        }
+		.csv-table th:nth-child(1) {
+            width:20px;
+        }
+		.csv-table th:nth-child(2) {
+            width:50px;
         }
 
         /* Zebra striping */
