@@ -61,14 +61,20 @@
     </style>
 </head>
 <body>
-    <h1>TrumpsAmerica2025</h1>
-    <h2><a href="https://github.com/jonms83/TrumpsAmerica2025" target="_blank">CSV</a> Parsed Data in Table</h2>
-    <div id="output"></div>
+    <div style="float:left">
+		<h1>TrumpsAmerica2025</h1>
+    <h2><a href="https://github.com/jonms83/TrumpsAmerica2025" target="_blank">CSV</a> Parsed Data in Table</h2></div>
+	<div style="float:left; margin:15px 0 0 100px;">
+		<input type="text" id="searchBar" placeholder="Search..."> <button id="clear">clear</button>
+	</div>
+    <div id="output" style="clear:both;"></div>
 
     <!-- Include PapaParse library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="script.js"></script>
-	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	<script>	
 $(document).ready(function() {
     // Function to repeatedly run the jQuery code with a pause in between
@@ -90,8 +96,44 @@ $(document).ready(function() {
 
     // Start the periodic execution
     periodicallyRunCode();
+	
+});
+$(document).ready(function() {
+    // Function to filter the table rows based on the search value, excluding the first row
+    function filterTableRows() {
+        var searchValue = $('#searchBar').val().toLowerCase();
+        $(".csv-table tr").each(function(index) {
+            if (index === 0) {
+                // Show the first row regardless of the search term
+                $(this).show();
+            } else {
+                var rowText = $(this).text().toLowerCase();
+                if (rowText.indexOf(searchValue) === -1) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+            }
+        });
+    }
+
+    // Event listeners for the search bar
+    $('#searchBar').on('change keyup', function() {
+        filterTableRows();
+    });
+
+    // Clear the search input and show all rows except the first one when clear button is clicked
+    $('#clear').click(function() {
+        $('#searchBar').val('');
+        $(".csv-table tr").each(function() {
+            if (this.rowIndex === 0) {
+                $(this).show(); // Show the first row by default
+            } else {
+                $(this).show(); // Show all other rows
+            }
+        });
+    });
 });
 	
-	
 	</script>
-</body>
+	</body></html>
