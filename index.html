@@ -68,4 +68,29 @@
     <!-- Include PapaParse library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <script src="script.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+	<script>
+/*		$(document).ready(function(){
+			$('.csv-table tr').each(function(){
+				var thisID = $(this).find('td:first').html();
+				console.log(thisID);
+				$(this).find('td:first').html('<a href="pdfs/'+thisID+'.pdf" target="_blank">'+thisID+'</a>')
+			});
+		});*/
+	
+	
+	
+	        $(document).ready(function() {
+            // Select all rows of the table and then select the first cell in each row
+            $('.csv-table tr').each(function() {
+                var firstCell = $(this).find('td:first');
+                if (firstCell.length > 0) { // Check if there is a first cell
+                    var thisID = firstCell.text();
+					firstCell.html('<a href="pdfs/'+thisID+'.pdf" target="_blank">'+thisID+'</a>')
+                }
+            });
+        });
+	
+	
+	</script>
 </body>
